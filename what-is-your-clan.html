@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is Your Clan · A Y-DNA Lineage Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --ink-soft: #3d342b;
+    --ink-faint: #6b5d4f;
+    --paper: #f4ece0;
+    --paper-deep: #ebe0cf;
+    --paper-warm: #ede1cc;
+    --rule: #c9b896;
+    --accent: #8b1e1e;
+    --accent-soft: #b8632e;
+    --gold: #a8843a;
+    --green-doc: #4a6741;
+    --amber-inf: #a87838;
+    --red-cont: #8b3a2a;
+    --gray-spec: #6b6259;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(168, 132, 58, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(139, 30, 30, 0.04) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .grain {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* HEADER / HERO */
+  header {
+    position: relative;
+    padding: 60px 40px 80px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .top-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 80px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .top-meta span { display: block; }
+
+  h1.title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(64px, 11vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: var(--ink);
+    position: relative;
+    z-index: 2;
+  }
+  h1.title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .deck {
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin-top: 32px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 2;
+  }
+
+  .lede {
+    margin-top: 56px;
+    max-width: 640px;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 2;
+    column-count: 1;
+  }
+  .lede p { margin-bottom: 14px; }
+  .lede p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 500;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 10px 0 0;
+    color: var(--accent);
+  }
+
+  .header-orn {
+    position: absolute;
+    top: 80px; right: 40px;
+    width: 240px;
+    opacity: 0.18;
+    z-index: 1;
+  }
+
+  /* SECTION HEADERS */
+  .section {
+    padding: 80px 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+  .section-intro {
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 56px;
+    line-height: 1.55;
+  }
+
+  /* CLAN GRID */
+  .clan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+
+  .clan {
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 26px 30px;
+    background: var(--paper);
+    position: relative;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+  .clan:hover {
+    background: var(--paper-warm);
+  }
+  .clan::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--accent);
+    transition: width 0.35s ease;
+  }
+  .clan:hover::before { width: 100%; }
+
+  .clan-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .clan-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .clan-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+  .clan-era {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+  }
+  .clan-stats {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .clan-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    gap: 12px;
+  }
+  .clan-stat-label {
+    color: var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .clan-stat-val {
+    font-weight: 600;
+    color: var(--ink);
+    text-align: right;
+    font-size: 14px;
+  }
+  .conf-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .conf-high { background: var(--green-doc); }
+  .conf-med { background: var(--amber-inf); }
+  .conf-low { background: var(--red-cont); }
+  .conf-spec { background: var(--gray-spec); }
+
+  /* SURVEY */
+  .survey {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .survey-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    margin-bottom: 32px;
+  }
+  .form-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .form-label .num {
+    color: var(--accent);
+    margin-right: 12px;
+    font-weight: 600;
+  }
+
+  select, .radio-group {
+    width: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px 18px;
+    color: var(--ink);
+    border-radius: 0;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%231a1612' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    transition: border-color 0.2s ease;
+  }
+  select:hover, select:focus {
+    border-color: var(--ink);
+    outline: none;
+  }
+
+  .radio-group {
+    background-image: none;
+    display: flex;
+    gap: 0;
+    padding: 0;
+  }
+  .radio-group label {
+    flex: 1;
+    padding: 14px 18px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid var(--rule);
+    transition: background 0.2s ease;
+    font-size: 18px;
+  }
+  .radio-group label:last-child { border-right: none; }
+  .radio-group input { display: none; }
+  .radio-group input:checked + span {
+    background: var(--ink);
+    color: var(--paper);
+    display: block;
+    margin: -14px -18px;
+    padding: 14px 18px;
+  }
+  .radio-group label:hover { background: var(--paper-warm); }
+
+  /* MIX HERITAGE TOGGLE */
+  .mix-toggle {
+    margin-top: 14px;
+  }
+  .mix-check {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 12px;
+    user-select: none;
+  }
+  .mix-check input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mix-track {
+    width: 40px;
+    height: 22px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 22px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+  .mix-thumb {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    background: var(--ink-faint);
+    border-radius: 50%;
+    transition: all 0.25s ease;
+  }
+  .mix-check input:checked ~ .mix-track {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .mix-check input:checked ~ .mix-track .mix-thumb {
+    left: 20px;
+    background: var(--paper);
+  }
+  .mix-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .mix-panel {
+    display: none;
+    margin-top: 18px;
+    padding: 22px 22px 24px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+  }
+  .mix-panel.show { display: block; }
+
+  .ratio-block {
+    margin-top: 24px;
+  }
+  .ratio-readout {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .ratio-readout span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .ratio-readout em {
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 16px;
+  }
+  .ratio-readout > span > span:first-child,
+  .ratio-readout > span > span:last-child {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .ratio-slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    outline: none;
+    cursor: pointer;
+  }
+  .ratio-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    cursor: grab;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .ratio-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    cursor: grab;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .ratio-ticks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+
+  button.reveal {
+    width: 100%;
+    margin-top: 16px;
+    padding: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  button.reveal:hover { background: var(--accent); }
+
+  /* RESULT */
+  .result {
+    margin-top: 56px;
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+  .result.show { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-banner {
+    padding: 40px 36px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .result-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .result-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .result-prob {
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .result-note {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  /* MIX BANNER (shown in result when 50/50 mode is on) */
+  .mix-banner {
+    margin: 20px 0 4px;
+    padding: 20px 22px;
+    background: var(--paper-deep);
+    border-left: 3px solid var(--accent);
+  }
+  .mix-banner-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .mix-banner-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .mix-banner-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 90px 60px;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+  }
+  .mix-banner-region {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .mix-banner-bar {
+    display: block;
+    height: 6px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+  .mix-banner-fill {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.5s ease;
+  }
+  .mix-banner-pct {
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    text-align: right;
+  }
+  .mix-banner-weight {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .mix-banner-note {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule);
+  }
+  .mix-banner-note em {
+    font-weight: 600;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .mix-banner-row {
+      grid-template-columns: 1fr 70px 60px;
+    }
+    .mix-banner-weight { display: none; }
+  }
+  .result-secondary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .result-runner {
+    padding: 20px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .runner-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .runner-prob {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-faint);
+  }
+
+  /* SHARE BUTTONS */
+  .share-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 16px 20px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    letter-spacing: 0.01em;
+  }
+  .share-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .share-btn-alt {
+    background: transparent;
+    border-color: var(--rule);
+    color: var(--ink-soft);
+  }
+  .share-btn-alt:hover {
+    background: var(--paper-warm);
+    border-color: var(--ink-soft);
+    color: var(--ink);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 80px 40px 60px;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-deep);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  footer .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  footer ul { list-style: none; font-size: 14px; }
+  footer li { margin-bottom: 8px; color: var(--ink-soft); }
+  footer .signature {
+    margin-top: 56px;
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 14px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* MODAL */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 22, 18, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .modal.show { display: flex; }
+  .modal-inner {
+    background: var(--paper);
+    max-width: 640px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 48px 48px 40px;
+    position: relative;
+    border: 1px solid var(--rule);
+    box-shadow: 0 20px 60px rgba(26, 22, 18, 0.3);
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: serif;
+    line-height: 1;
+  }
+  .modal-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .modal-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .modal-era {
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-faint);
+    margin-bottom: 32px;
+  }
+  .modal-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 28px;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .modal-stat {
+    padding: 14px 16px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .modal-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .modal-stat-val {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .modal-note {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding: 22px 0;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+  }
+  .modal-where {
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .modal-where strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    header { padding: 40px 24px 60px; }
+    .section { padding: 56px 24px; }
+    footer { padding: 60px 24px 40px; }
+    footer .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+    .clan-grid { grid-template-columns: 1fr; }
+    .radio-group { flex-direction: column; }
+    .radio-group label { border-right: none; border-bottom: 1px solid var(--rule); }
+    .radio-group label:last-child { border-bottom: none; }
+    .header-orn { display: none; }
+    .top-meta { flex-direction: column; gap: 8px; margin-bottom: 40px; }
+    .modal-inner { padding: 36px 28px 28px; }
+    .modal-name { font-size: 38px; }
+    .result-name { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="top-meta">
+    <span>Vol. I &nbsp;·&nbsp; A Y-DNA &amp; mtDNA Lineage Survey</span>
+    <span>Theoretical population genetics</span>
+    <span>Twenty figures &nbsp;·&nbsp; One question</span>
+  </div>
+
+  <svg class="header-orn" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="95" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="45" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+    <g stroke="#1a1612" stroke-width="0.5" fill="none">
+      <path d="M 100 5 L 100 195"/>
+      <path d="M 5 100 L 195 100"/>
+      <path d="M 32 32 L 168 168"/>
+      <path d="M 168 32 L 32 168"/>
+    </g>
+    <g fill="#8b1e1e">
+      <circle cx="100" cy="100" r="3"/>
+      <circle cx="100" cy="30" r="2"/>
+      <circle cx="100" cy="170" r="2"/>
+      <circle cx="30" cy="100" r="2"/>
+      <circle cx="170" cy="100" r="2"/>
+    </g>
+  </svg>
+
+  <h1 class="title">What is<br>your <em>clan?</em></h1>
+  <p class="deck">A speculative survey of twenty patrilines and matrilines that may or may not still travel through living veins.</p>
+
+  <div class="lede">
+    <p>Most of what you inherit is shuffled at every generation. But two pieces refuse to mix. The Y-chromosome passes father to son, unchanged. Mitochondrial DNA passes mother to daughter, unchanged. Each is a kind of receipt, a name written in nucleotides that survives, sometimes, for thousands of years.</p>
+    <p>This survey asks a simple, slightly absurd question. Of the twenty famous figures catalogued here, whose receipt are you most likely carrying? Answer three questions about your heritage and the survey will name your most plausible clan.</p>
+  </div>
+</header>
+
+<section class="section">
+  <span class="section-num">§ I &nbsp;·&nbsp; The Twenty</span>
+  <h2 class="section-title">The catalogue.</h2>
+  <p class="section-intro">Twenty figures from across two millennia and four continents. Some lines are documented and tested. Some are extinct. Most fall somewhere in between. Click any name to read its file.</p>
+
+  <div class="clan-grid" id="grid"></div>
+</section>
+
+<section class="section survey">
+  <div class="survey-inner">
+    <span class="section-num">§ II &nbsp;·&nbsp; The Survey</span>
+    <h2 class="section-title">Three questions.</h2>
+    <p class="section-intro">No tests, no swabs, no fees. Just three answers about your background. The arithmetic below will tell you which clan claims you most strongly.</p>
+
+    <div class="form-row">
+      <label class="form-label"><span class="num">01</span> Sex assigned at birth</label>
+      <div class="radio-group">
+        <label><input type="radio" name="sex" value="m" checked><span>Male, can carry Y</span></label>
+        <label><input type="radio" name="sex" value="f"><span>Female, mtDNA only</span></label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label"><span class="num">02</span> Heritage</label>
+      <select id="region">
+        <option value="levant_christian">Levantine Christian (Lebanon, Syria, Palestine)</option>
+        <option value="levant_druze">Druze</option>
+        <option value="levant_muslim">Levantine Muslim</option>
+        <option value="jewish_cohen">Jewish, Cohen surname</option>
+        <option value="jewish_ashkenazi">Jewish, Ashkenazi</option>
+        <option value="jewish_sephardi">Jewish, Sephardi or Mizrahi</option>
+        <option value="arab_peninsula">Arabian Peninsula</option>
+        <option value="iranian">Iranian or Persian</option>
+        <option value="north_african">North African</option>
+        <option value="european_german">European (German, Austrian, Swiss)</option>
+        <option value="european_british">European (British or Irish)</option>
+        <option value="european_italian">European (Italian)</option>
+        <option value="european_other">European (other)</option>
+        <option value="american_white">American of European descent</option>
+        <option value="east_asian">East Asian (Han Chinese)</option>
+        <option value="south_asian">South Asian</option>
+        <option value="sub_saharan">Sub-Saharan African</option>
+        <option value="east_african">East African or Horn of Africa</option>
+        <option value="americas">Indigenous Americas</option>
+        <option value="mixed">Mixed or unsure</option>
+      </select>
+
+      <div class="mix-toggle">
+        <label class="mix-check">
+          <input type="checkbox" id="mix-on" onchange="toggleMix()">
+          <span class="mix-track"><span class="mix-thumb"></span></span>
+          <span class="mix-label">I have mixed heritage, add a second background</span>
+        </label>
+      </div>
+
+      <div class="mix-panel" id="mix-panel">
+        <label class="form-label" style="margin-top: 8px;"><span class="num">02b</span> Second heritage</label>
+        <select id="region2">
+          <option value="levant_christian">Levantine Christian (Lebanon, Syria, Palestine)</option>
+          <option value="levant_druze">Druze</option>
+          <option value="levant_muslim">Levantine Muslim</option>
+          <option value="jewish_cohen">Jewish, Cohen surname</option>
+          <option value="jewish_ashkenazi">Jewish, Ashkenazi</option>
+          <option value="jewish_sephardi">Jewish, Sephardi or Mizrahi</option>
+          <option value="arab_peninsula">Arabian Peninsula</option>
+          <option value="iranian">Iranian or Persian</option>
+          <option value="north_african">North African</option>
+          <option value="european_german">European (German, Austrian, Swiss)</option>
+          <option value="european_british">European (British or Irish)</option>
+          <option value="european_italian">European (Italian)</option>
+          <option value="european_other">European (other)</option>
+          <option value="american_white">American of European descent</option>
+          <option value="east_asian" selected>East Asian (Han Chinese)</option>
+          <option value="south_asian">South Asian</option>
+          <option value="sub_saharan">Sub-Saharan African</option>
+          <option value="east_african">East African or Horn of Africa</option>
+          <option value="americas">Indigenous Americas</option>
+        </select>
+
+        <div class="ratio-block">
+          <div class="ratio-readout">
+            <span><span id="r1-pct">50</span>% <em id="r1-name">first</em></span>
+            <span><em id="r2-name">second</em> <span id="r2-pct">50</span>%</span>
+          </div>
+          <input type="range" id="ratio" min="10" max="90" value="50" step="5" oninput="updateRatio()" class="ratio-slider">
+          <div class="ratio-ticks">
+            <span>10/90</span>
+            <span>25/75</span>
+            <span>50/50</span>
+            <span>75/25</span>
+            <span>90/10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label"><span class="num">03</span> Surname or known descent</label>
+      <select id="claim">
+        <option value="none">No special claim</option>
+        <option value="sayyid">Sayyid, Sharif, or Hashemite</option>
+        <option value="cohen">Cohen, Kohen, or Katz</option>
+        <option value="kong">Kong (孔)</option>
+        <option value="bedi">Bedi (Guru Nanak lineage)</option>
+        <option value="maronite_priestly">Maronite priestly family</option>
+        <option value="royal_european">European royal or noble descent</option>
+        <option value="rockefeller_surname">Rockefeller</option>
+        <option value="darwin_surname">Darwin</option>
+      </select>
+    </div>
+
+    <button class="reveal" onclick="reveal()">Reveal my clan →</button>
+
+    <div class="result" id="result"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h4>On the method</h4>
+      <p>The Y-chromosome makes up roughly 0.9% of a man's genome, about 57 million base pairs, and passes father to son with almost no mixing. After eighty generations, it is still a 99.99998% match to the original. Mitochondrial DNA does the same for the mother-line. Everything else recombines.</p>
+      <p style="margin-top: 12px;">The survey is a Fermi-style toy, not a test. Real Y-DNA testing through FTDNA Big-Y or YFull is the only way to actually know your haplogroup.</p>
+    </div>
+    <div>
+      <h4>Confidence key</h4>
+      <ul>
+        <li><span class="conf-dot conf-high"></span> Documented</li>
+        <li><span class="conf-dot conf-med"></span> Inferred</li>
+        <li><span class="conf-dot conf-low"></span> Contested</li>
+        <li><span class="conf-dot conf-spec"></span> Speculative</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Sources</h4>
+      <ul>
+        <li>Haber et al. 2017</li>
+        <li>Zerjal et al. 2003</li>
+        <li>Skorecki et al. 1997</li>
+        <li>Hammer et al. 2009</li>
+        <li>Yan et al. 2013</li>
+        <li>Begg et al. 2023</li>
+        <li>Rohde, Olson &amp; Chang 2004</li>
+      </ul>
+    </div>
+  </div>
+  <p class="signature">A theoretical exercise. No specific historical figure is claimed as ancestor to any individual.<br>One man, one son, eighty generations. What survives.</p>
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const figures = [
+  { id:'jesus', name:'Jesus of Nazareth', cat:'spiritual', era:'~30 AD', region:'Levant', gens:80, carriers:'~200,000', hap:'J1 or J2', siblings:'James, Joses, Judas, Simon', conf:'low', confLabel:'Theoretical', note:'The Y-line technically traces Joseph, not Jesus. If the siblings\' descendants persisted, and James the Just\'s grandsons were documented before Domitian around 90 AD, the line is plausible. The 95–97% probability of extinction after eighty generations is the central uncertainty.', where:'Levantine Christian, Druze, Samaritan, and Mizrahi communities. Maronite priestly families. Roughly 5–15% of men within these endogamous populations.' },
+  { id:'muhammad', name:'Muhammad', cat:'spiritual', era:'~570–632 AD', region:'Arabia → global', gens:56, carriers:'Tens of millions claim', hap:'J1 Quraysh', siblings:'None surviving the male line', conf:'high', confLabel:'Documented', note:'The Sayyid and Sharif lineages, descendants through his grandsons Hasan and Husayn, are the most extensively documented patriline in human history. Hashemites of Jordan, Alaouites of Morocco, millions of South Asian and African Sayyids. Y-DNA studies show the actual cluster is narrower than claims.', where:'Arabian Peninsula, North Africa, Iran, South Asia, the Horn of Africa, and the global Muslim diaspora.' },
+  { id:'moses', name:'Moses', cat:'spiritual', era:'~13th c. BC', region:'Levant / Egypt', gens:130, carriers:'Unknown', hap:'J1 if Cohen tradition holds', siblings:'Aaron, same Y', conf:'spec', confLabel:'Speculative', note:'Historicity itself is debated. But the Cohen Modal Haplotype (J1-Z18271) is found in roughly half of self-identified Jewish Cohens and dates to about three thousand years ago. The closest empirical analog to a tested biblical Y-line. Moses and Aaron, brothers, would share it.', where:'Jewish populations globally, particularly those with Cohen surnames or priestly tradition.' },
+  { id:'cohen', name:'Aaron (Cohen lineage)', cat:'spiritual', era:'~13th c. BC', region:'Jewish diaspora', gens:130, carriers:'~300,000 Cohens with CMH', hap:'J1-Z18271 (CMH)', siblings:'Moses', conf:'high', confLabel:'Empirically tested', note:'Skorecki 1997 and Hammer 2009: a striking concentration of one Y-haplotype among self-identified Jewish priests, dated to roughly the right era. The closest thing in genetics to a successful test of a biblical lineage claim.', where:'Jewish populations globally. Higher concentration in those with Cohen, Kohen, Kahn, or Katz surnames.' },
+  { id:'confucius', name:'Confucius', cat:'spiritual', era:'~551–479 BC', region:'China → global', gens:80, carriers:'~2 million registered', hap:'C2 and O subclades', siblings:'Half-brother Mengpi', conf:'high', confLabel:'Documented', note:'The Kong family genealogy has been continuously recorded for more than eighty generations, the longest documented patriline anywhere. Yan et al. 2013 and later Y-DNA studies confirm a shared cluster among the registered descendants. The empirical gold standard for this kind of modeling.', where:'Han Chinese populations, particularly families surnamed Kong (孔). Documented members across China, Taiwan, and the East Asian diaspora.' },
+  { id:'buddha', name:'Siddhartha Gautama', cat:'spiritual', era:'~5th c. BC', region:'Nepal / India', gens:100, carriers:'Zero (line extinct gen 1)', hap:'Unknown', siblings:'Half-brother Nanda, also monastic', conf:'high', confLabel:'Extinct', note:'His only son Rahula became a monk and per Buddhist tradition had no children. The cleanest case of "extinction in the danger zone." A line that ended in generation one.', where:'Nowhere on the Y-line. A counter-example for the survey.' },
+  { id:'gurunanak', name:'Guru Nanak', cat:'spiritual', era:'1469–1539 AD', region:'Punjab', gens:18, carriers:'The Bedi family', hap:'Likely R1a', siblings:'Sister only', conf:'high', confLabel:'Documented', note:'Two sons, Sri Chand and Lakhmi Das. Descendants form the Bedi family, well-documented for eighteen generations, a span over which the Y-receipt is preserved at greater than 99.9999% fidelity.', where:'Sikh Punjabi families, particularly those with the Bedi surname.' },
+  { id:'einstein', name:'Albert Einstein', cat:'scientist', era:'1879–1955', region:'Germany → USA', gens:5, carriers:'Dozens', hap:'E1b1b1 (inferred Ashkenazi)', siblings:'Sister Maja only', conf:'high', confLabel:'Documented', note:'Son Hans Albert had Bernhard, who had five children. The Einstein Y-line is alive and well after only five generations, with the receipt essentially perfect. Modern living descendants are publicly known.', where:'A small number of documented descendants in the United States and Europe.' },
+  { id:'darwin', name:'Charles Darwin', cat:'scientist', era:'1809–1882', region:'England', gens:6, carriers:'50+ documented', hap:'Likely R1b', siblings:'Brother Erasmus Alvey', conf:'high', confLabel:'Documented', note:'Ten children, multiple sons, an extensively documented family tree continuing to the present (Sarah Darwin, Chris Darwin, and others). The Darwin Y-line is among the better-traced English patrilines of the past two centuries.', where:'British and Australian Darwin family descendants.' },
+  { id:'newton', name:'Isaac Newton', cat:'scientist', era:'1642–1727', region:'England', gens:12, carriers:'Zero', hap:'Unknown', siblings:'Half-siblings only', conf:'high', confLabel:'Extinct', note:'Never married, no children. The Newton Y-line he carried passed forward only via his half-brothers, if at all. He is to genetics what he was to optics: solitary.', where:'Nowhere on his direct Y-line.' },
+  { id:'tesla', name:'Nikola Tesla', cat:'scientist', era:'1856–1943', region:'Serbia / USA', gens:4, carriers:'Zero (direct)', hap:'I2a (Serbian)', siblings:'Brother Dane, died young', conf:'high', confLabel:'Extinct', note:'Celibate by choice. No children. The Tesla family Y persists in Serbia through collateral relatives but his own line ended with him.', where:'Collateral Tesla relatives in the Serbian I2a cluster.' },
+  { id:'davinci', name:'Leonardo da Vinci', cat:'artist', era:'1452–1519', region:'Italy', gens:17, carriers:'~14 living verified', hap:'Under study', siblings:'Multiple half-siblings', conf:'high', confLabel:'Tested', note:'Illegitimate, no acknowledged children. But the Leonardo DNA Project (Vezzosi and Sabato, 2021) identified fourteen living male-line descendants through his half-brothers, still living in the Tuscan region around Vinci.', where:'A small set of identified men in Tuscany, Italy.' },
+  { id:'beethoven', name:'Ludwig van Beethoven', cat:'artist', era:'1770–1827', region:'Germany / Austria', gens:8, carriers:'None confirmed', hap:'I-FT396000', siblings:'Brothers Caspar, Johann', conf:'high', confLabel:'Tested, NPE', note:'In 2023, Begg et al. sequenced his Y-chromosome from authenticated hair locks. It did not match living men with the van Beethoven surname. Somewhere in his paternal line, a non-paternity event severed the chain. The most famous published case of DNA disrupting a presumed lineage.', where:'No living men confirmed to share his exact Y. The "van Beethoven" surname Y belongs to a different ancestor.' },
+  { id:'genghis', name:'Genghis Khan', cat:'ruler', era:'~1162–1227 AD', region:'Mongolia → Eurasia', gens:30, carriers:'~16 million (contested)', hap:'C2-M407 star cluster', siblings:'Brothers Jochi Khasar, Khachiun, Temüge', conf:'med', confLabel:'Inferred', note:'Zerjal 2003 found that roughly 8% of men in the former Mongol empire share a distinctive Y-cluster, suggesting one extraordinary patriarchal expansion. Recent work questions whether the cluster traces specifically to Genghis or is composite. Still, the most famous case of empire-driven Y-line spread in history.', where:'Central Asia, Mongolia, parts of China, Iran, and the Mongol diaspora.' },
+  { id:'niall', name:'Niall of the Nine Hostages', cat:'ruler', era:'~400 AD', region:'Ireland → diaspora', gens:64, carriers:'~3 million (contested)', hap:'R-M222', siblings:'Multiple', conf:'low', confLabel:'Contested', note:'Moore 2006 attributed a northwest Irish Y-cluster to Niall. Later work shows R-M222 likely predates him by centuries and represents a broader founder cluster, not one specific man.', where:'Northwest Ireland, Scotland, and the Irish diaspora, especially the United States and Australia.' },
+  { id:'napoleon', name:'Napoleon Bonaparte', cat:'ruler', era:'1769–1821', region:'France / Corsica', gens:9, carriers:'Roughly 10–20', hap:'E1b1b1c1 (tested)', siblings:'Joseph, Lucien, Louis, Jérôme', conf:'high', confLabel:'Tested', note:'Direct line extinct via Napoleon II, who died young and childless. But Napoleon\'s Y-DNA was reconstructed through collateral descendants of his brothers. Prince Napoléon Jean-Christophe Bonaparte, born 1986, carries the Bonaparte Y through Jérôme.', where:'A small number of identified members of the modern Bonaparte family.' },
+  { id:'rockefeller', name:'John D. Rockefeller Sr.', cat:'modern', era:'1839–1937', region:'USA', gens:5, carriers:'~150', hap:'Unknown', siblings:'Brothers William, Frank', conf:'high', confLabel:'Documented', note:'Through John Jr. to his five sons (Nelson, David, Laurance, Winthrop, John III) and onward through their many grandsons. One of the most documented modern American patrilines.', where:'The extended Rockefeller family in the United States.' },
+  { id:'mary', name:'Mary, mother of Jesus', cat:'matriarch', era:'~1st c. BC to AD', region:'Levant', gens:80, carriers:'Unknown (mtDNA)', hap:'mtDNA H, J, or T', siblings:'Tradition varies', conf:'spec', confLabel:'Speculative', note:'If she had daughters who had daughters, their maternal-line descendants today carry her mtDNA at greater than 99.999% fidelity. Mitochondrial DNA mutates slower than the Y, so the receipt is even cleaner across two thousand years, only about 16,500 base pairs but unbroken.', where:'Levantine Christian, Druze, Samaritan, and Mizrahi maternal lines.' },
+  { id:'cleopatra', name:'Cleopatra VII', cat:'matriarch', era:'~69–30 BC', region:'Egypt → Mauretania', gens:82, carriers:'Unknown (mtDNA)', hap:'Macedonian Greek origin', siblings:'Multiple', conf:'spec', confLabel:'Speculative', note:'Her only daughter to reproduce was Cleopatra Selene, who married Juba II of Mauretania (modern Morocco). The daughter-line is traceable for one or two generations into Roman provincial aristocracy, then goes dark. Her mtDNA may persist in North African or Levantine populations through paths now unknown.', where:'Hypothetically among Coptic Egyptian, Maronite, or Berber maternal lines. Untraceable in practice.' },
+  { id:'khadijah', name:'Khadijah bint Khuwaylid', cat:'matriarch', era:'~555–619 AD', region:'Arabia → Muslim world', gens:56, carriers:'Millions (Fatimah line)', hap:'Unknown', siblings:'Yes', conf:'med', confLabel:'Documented', note:'Muhammad\'s first wife. Her mtDNA passes through their daughter Fatimah to the maternal-line descendants of Fatimah\'s daughters. Sayyids inherit their Y from Muhammad and, on one branch, their mtDNA from Khadijah. The only well-documented mtDNA line in this survey.', where:'Maternal-line descendants of Fatimah, particularly Sayyid families in the Arab world, South Asia, and the broader Muslim diaspora.' }
+];
+
+const CAT_LABELS = {
+  spiritual: 'Spiritual figure',
+  scientist: 'Scientist',
+  artist: 'Artist',
+  ruler: 'Ruler',
+  modern: 'Modern',
+  matriarch: 'Matriarch · mtDNA'
+};
+function categoryLabel(cat) { return CAT_LABELS[cat] || cat; }
+
+const grid = document.getElementById('grid');
+figures.forEach((f, i) => {
+  const card = document.createElement('div');
+  card.className = 'clan';
+  card.innerHTML = `
+    <div class="clan-num">No. ${String(i+1).padStart(2,'0')}</div>
+    <div class="clan-cat">${categoryLabel(f.cat)}</div>
+    <div class="clan-name">${f.name}</div>
+    <div class="clan-era">${f.era} · ${f.region}</div>
+    <div class="clan-stats">
+      <div class="clan-stat"><span class="clan-stat-label">Carriers</span><span class="clan-stat-val">${f.carriers}</span></div>
+      <div class="clan-stat"><span class="clan-stat-label">Haplogroup</span><span class="clan-stat-val">${f.hap}</span></div>
+      <div class="clan-stat"><span class="clan-stat-label">Status</span><span class="clan-stat-val"><span class="conf-dot conf-${f.conf}"></span>${f.confLabel}</span></div>
+    </div>
+  `;
+  card.onclick = () => openModal(f);
+  grid.appendChild(card);
+});
+
+function openModal(f) {
+  const body = document.getElementById('modal-body');
+  body.innerHTML = `
+    <div class="modal-cat">${categoryLabel(f.cat)} · ${f.confLabel}</div>
+    <div class="modal-name">${f.name}</div>
+    <div class="modal-era">${f.era} · ${f.region}</div>
+    <div class="modal-stats">
+      <div class="modal-stat"><div class="modal-stat-label">Generations</div><div class="modal-stat-val">~${f.gens}</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Carriers</div><div class="modal-stat-val">${f.carriers}</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Haplogroup</div><div class="modal-stat-val">${f.hap}</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Siblings</div><div class="modal-stat-val">${f.siblings}</div></div>
+    </div>
+    <p class="modal-note">${f.note}</p>
+    <div class="modal-where"><strong>Where carriers concentrate</strong>${f.where}</div>
+  `;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ─── THE SURVEY LOGIC ──────────────────────────────────────────────
+
+// Each figure gets a score per (region × claim × sex) combination. Higher = more likely.
+const oddsTable = {
+  // jesus
+  jesus: { levant_christian:12, levant_druze:10, levant_muslim:4, jewish_ashkenazi:2, jewish_sephardi:4, jewish_cohen:3, arab_peninsula:1, european_italian:0.3, european_other:0.1, european_german:0.1, european_british:0.05, american_white:0.1, mixed:0.5, north_african:0.5, iranian:0.5, east_asian:0.001, south_asian:0.05, sub_saharan:0.01, east_african:0.05, americas:0.01 },
+  muhammad: { arab_peninsula:15, levant_muslim:3, north_african:2, iranian:2, south_asian:3, east_african:2, european_other:0.05, european_german:0.02, european_british:0.02, european_italian:0.1, american_white:0.03, east_asian:0.05, mixed:0.3, jewish_ashkenazi:0.1, jewish_sephardi:0.3, jewish_cohen:0.1, levant_christian:0.1, levant_druze:0.05, sub_saharan:0.1, americas:0.01 },
+  moses: { jewish_cohen:30, jewish_ashkenazi:5, jewish_sephardi:5, levant_muslim:0.3, levant_christian:0.2, levant_druze:0.2, arab_peninsula:0.2, european_other:0.05, european_german:0.05, european_british:0.05, european_italian:0.1, american_white:0.1, mixed:0.3, north_african:0.2, iranian:0.1, east_asian:0.001, south_asian:0.01, sub_saharan:0.01, east_african:0.01, americas:0.001 },
+  cohen: { jewish_cohen:50, jewish_ashkenazi:8, jewish_sephardi:8, levant_muslim:0.5, levant_christian:0.3, levant_druze:0.2, arab_peninsula:0.2, european_other:0.05, european_german:0.05, european_british:0.05, european_italian:0.1, american_white:0.1, mixed:0.3, north_african:0.2, iranian:0.1, east_asian:0.001, south_asian:0.01, sub_saharan:0.01, east_african:0.01, americas:0.001 },
+  confucius: { east_asian:0.15, mixed:0.05, south_asian:0.001, european_other:0.001, levant_christian:0.001, levant_druze:0.001, levant_muslim:0.001, jewish_ashkenazi:0.001, jewish_sephardi:0.001, jewish_cohen:0.001, arab_peninsula:0.001, iranian:0.001, north_african:0.001, sub_saharan:0.001, east_african:0.001, americas:0.001, european_german:0.001, european_british:0.001, european_italian:0.001, american_white:0.001 },
+  gurunanak: { south_asian:0.08, mixed:0.01, european_other:0.001, east_asian:0.001, levant_christian:0.001, levant_druze:0.001, levant_muslim:0.001, jewish_ashkenazi:0.001, jewish_sephardi:0.001, jewish_cohen:0.001, arab_peninsula:0.001, iranian:0.001, north_african:0.001, sub_saharan:0.001, east_african:0.001, americas:0.001, european_german:0.001, european_british:0.001, european_italian:0.001, american_white:0.001 },
+  einstein: { jewish_ashkenazi:0.05, jewish_sephardi:0.001, jewish_cohen:0.001, european_german:0.005, mixed:0.005, american_white:0.005, european_other:0.001, european_british:0.001, european_italian:0.001, levant_christian:0.001, levant_druze:0.001, levant_muslim:0.001, arab_peninsula:0.001, iranian:0.001, north_african:0.001, east_asian:0.001, south_asian:0.001, sub_saharan:0.001, east_african:0.001, americas:0.001 },
+  darwin: { european_british:0.05, american_white:0.01, european_other:0.005, european_german:0.005, european_italian:0.001, mixed:0.005, jewish_ashkenazi:0.001, jewish_sephardi:0.001, jewish_cohen:0.001, levant_christian:0.001, levant_druze:0.001, levant_muslim:0.001, arab_peninsula:0.001, iranian:0.001, north_african:0.001, east_asian:0.001, south_asian:0.001, sub_saharan:0.001, east_african:0.001, americas:0.001 },
+  genghis: { east_asian:8, south_asian:1, iranian:2, european_other:0.2, mixed:0.5, european_german:0.1, european_british:0.05, european_italian:0.05, american_white:0.1, levant_christian:0.05, levant_druze:0.05, levant_muslim:0.1, jewish_ashkenazi:0.05, jewish_sephardi:0.05, jewish_cohen:0.05, arab_peninsula:0.05, north_african:0.05, sub_saharan:0.01, east_african:0.01, americas:0.05 },
+  niall: { european_british:4, european_other:0.5, european_german:0.3, european_italian:0.1, american_white:1, mixed:0.3, americas:0.5, levant_christian:0.001, levant_druze:0.001, levant_muslim:0.001, jewish_ashkenazi:0.05, jewish_sephardi:0.05, jewish_cohen:0.05, arab_peninsula:0.001, iranian:0.001, north_african:0.001, sub_saharan:0.001, east_african:0.001, east_asian:0.001, south_asian:0.001 },
+  napoleon: { european_italian:0.001, european_other:0.0005, american_white:0.0001, mixed:0.0005, european_german:0.0001, european_british:0.0001, levant_christian:0.0001, levant_druze:0.0001, levant_muslim:0.0001, jewish_ashkenazi:0.0001, jewish_sephardi:0.0001, jewish_cohen:0.0001, arab_peninsula:0.0001, iranian:0.0001, north_african:0.0001, east_asian:0.0001, south_asian:0.0001, sub_saharan:0.0001, east_african:0.0001, americas:0.0001 },
+  rockefeller: { american_white:0.005, european_german:0.0001, european_other:0.0001, european_british:0.0001, european_italian:0.0001, mixed:0.001, jewish_ashkenazi:0.0001, jewish_sephardi:0.0001, jewish_cohen:0.0001, levant_christian:0.0001, levant_druze:0.0001, levant_muslim:0.0001, arab_peninsula:0.0001, iranian:0.0001, north_african:0.0001, east_asian:0.0001, south_asian:0.0001, sub_saharan:0.0001, east_african:0.0001, americas:0.0001 },
+  // mtDNA: applies to BOTH sexes (inherited by all, passed on by women)
+  mary: { levant_christian:10, levant_druze:8, levant_muslim:3, jewish_ashkenazi:1.5, jewish_sephardi:3, jewish_cohen:2, arab_peninsula:1, north_african:0.5, european_italian:0.3, european_other:0.1, european_german:0.1, european_british:0.05, american_white:0.1, mixed:0.5, iranian:0.5, east_asian:0.001, south_asian:0.05, sub_saharan:0.01, east_african:0.05, americas:0.01 },
+  cleopatra: { north_african:1, european_italian:0.3, european_other:0.2, european_german:0.1, european_british:0.05, american_white:0.1, mixed:0.3, levant_christian:0.5, levant_druze:0.3, levant_muslim:0.3, jewish_ashkenazi:0.2, jewish_sephardi:0.3, jewish_cohen:0.1, arab_peninsula:0.1, iranian:0.1, east_asian:0.001, south_asian:0.05, sub_saharan:0.05, east_african:0.1, americas:0.01 },
+  khadijah: { arab_peninsula:8, levant_muslim:1.5, north_african:1, iranian:1, south_asian:1.5, east_african:1, european_other:0.02, european_german:0.01, european_british:0.01, european_italian:0.05, american_white:0.02, east_asian:0.02, mixed:0.2, jewish_ashkenazi:0.05, jewish_sephardi:0.1, jewish_cohen:0.05, levant_christian:0.05, levant_druze:0.02, sub_saharan:0.05, americas:0.001 }
+};
+
+// Figures excluded from the survey (extinct lines):
+const extinct = ['buddha','newton','tesla','beethoven'];
+// These have living lines but only via VERY specific surname matches:
+const surnameOnly = ['davinci','napoleon','rockefeller','darwin','einstein'];
+
+const claimBoosts = {
+  sayyid: { muhammad: 30, khadijah: 25 },
+  cohen: { cohen: 50, moses: 30 },
+  kong: { confucius: 60 },
+  bedi: { gurunanak: 70 },
+  maronite_priestly: { jesus: 18, mary: 16 },
+  royal_european: { niall: 3, napoleon: 2 },
+  rockefeller_surname: { rockefeller: 85 },
+  darwin_surname: { darwin: 60 }
+};
+
+const REGION_LABELS = {
+  levant_christian: 'Levantine Christian',
+  levant_druze: 'Druze',
+  levant_muslim: 'Levantine Muslim',
+  jewish_cohen: 'Jewish (Cohen)',
+  jewish_ashkenazi: 'Ashkenazi Jewish',
+  jewish_sephardi: 'Sephardi / Mizrahi Jewish',
+  arab_peninsula: 'Arabian Peninsula',
+  iranian: 'Iranian',
+  north_african: 'North African',
+  european_german: 'German / Austrian',
+  european_british: 'British / Irish',
+  european_italian: 'Italian',
+  european_other: 'European',
+  american_white: 'American (European descent)',
+  east_asian: 'East Asian',
+  south_asian: 'South Asian',
+  sub_saharan: 'Sub-Saharan African',
+  east_african: 'East African',
+  americas: 'Indigenous American',
+  mixed: 'Mixed'
+};
+
+function toggleMix() {
+  const on = document.getElementById('mix-on').checked;
+  document.getElementById('mix-panel').classList.toggle('show', on);
+  if (on) updateRatio();
+}
+
+function updateRatio() {
+  const r1 = parseInt(document.getElementById('ratio').value, 10);
+  const r2 = 100 - r1;
+  document.getElementById('r1-pct').textContent = r1;
+  document.getElementById('r2-pct').textContent = r2;
+  const reg1 = document.getElementById('region').value;
+  const reg2 = document.getElementById('region2').value;
+  document.getElementById('r1-name').textContent = REGION_LABELS[reg1] || reg1;
+  document.getElementById('r2-name').textContent = REGION_LABELS[reg2] || reg2;
+}
+// Also update names when either dropdown changes
+document.getElementById('region').addEventListener('change', () => {
+  if (document.getElementById('mix-on').checked) updateRatio();
+});
+document.getElementById('region2').addEventListener('change', updateRatio);
+
+function reveal() {
+  const sex = document.querySelector('input[name="sex"]:checked').value;
+  const region = document.getElementById('region').value;
+  const claim = document.getElementById('claim').value;
+  const mixOn = document.getElementById('mix-on').checked;
+  const region2 = document.getElementById('region2').value;
+  const ratio = parseInt(document.getElementById('ratio').value, 10);
+  const w1 = ratio / 100;
+  const w2 = 1 - w1;
+
+  // Helper: get baseline odds for one region
+  const getBase = (figId, reg) => {
+    return (oddsTable[figId] && oddsTable[figId][reg]) !== undefined
+      ? oddsTable[figId][reg]
+      : 0.001;
+  };
+
+  // Score each figure
+  const scores = [];
+  figures.forEach(f => {
+    if (extinct.includes(f.id)) return;
+    const isMt = f.cat === 'matriarch';
+    // Y-lines: women score them at 30% strength (they don't carry but male relatives could)
+    let sexMod = 1;
+    if (!isMt && sex === 'f') sexMod = 0.3;
+
+    // Compute base: weighted average across two heritages if mix is on
+    let base;
+    if (mixOn && region !== region2) {
+      base = getBase(f.id, region) * w1 + getBase(f.id, region2) * w2;
+    } else {
+      base = getBase(f.id, region);
+    }
+    base = base * sexMod;
+
+    // Apply claim boost (claim overrides region math entirely)
+    if (claim !== 'none' && claimBoosts[claim] && claimBoosts[claim][f.id]) {
+      base = claimBoosts[claim][f.id];
+      if (!isMt && sex === 'f') base *= 0.3;
+    }
+    // Surname-only figures: zero out if no matching surname claim
+    if (surnameOnly.includes(f.id)) {
+      const surnameMatch = (claim === 'rockefeller_surname' && f.id === 'rockefeller') ||
+                           (claim === 'darwin_surname' && f.id === 'darwin');
+      if (!surnameMatch) base = base * 0.05;
+    }
+    scores.push({ figure: f, score: base });
+  });
+
+  scores.sort((a, b) => b.score - a.score);
+
+  const top = scores[0];
+  const runners = scores.slice(1, 4);
+
+  const f = top.figure;
+  const isMt = f.cat === 'matriarch';
+
+  let probLabel;
+  if (top.score >= 20) probLabel = 'Plausible';
+  else if (top.score >= 2) probLabel = 'Possible';
+  else if (top.score >= 0.1) probLabel = 'Unlikely but elevated';
+  else probLabel = 'Vanishingly rare';
+
+  const formatScore = s => s >= 1 ? s.toFixed(1) + '%' : s >= 0.01 ? s.toFixed(3) + '%' : '< 0.01%';
+
+  let context = '';
+  if (sex === 'f' && !isMt) {
+    context = ' Since you do not carry a Y-chromosome yourself, this score applies to your father, brothers, and any sons. You may carry related autosomal DNA.';
+  }
+
+  // Mix-mode banner: show the weighted breakdown for the top figure
+  let mixBanner = '';
+  if (mixOn && region !== region2) {
+    const s1 = getBase(f.id, region) * (sexMod = (!isMt && sex === 'f') ? 0.3 : 1);
+    const s2 = getBase(f.id, region2) * sexMod;
+    // Don't show breakdown if claim overrode the math
+    const claimOverrode = claim !== 'none' && claimBoosts[claim] && claimBoosts[claim][f.id];
+    if (!claimOverrode) {
+      mixBanner = `
+        <div class="mix-banner">
+          <div class="mix-banner-label">Weighted by your ${ratio}/${100-ratio} heritage</div>
+          <div class="mix-banner-rows">
+            <div class="mix-banner-row">
+              <span class="mix-banner-region">${REGION_LABELS[region]}</span>
+              <span class="mix-banner-bar"><span class="mix-banner-fill" style="width: ${Math.min(s1 / Math.max(s1, s2, 0.001) * 100, 100)}%;"></span></span>
+              <span class="mix-banner-pct">${formatScore(s1)}</span>
+              <span class="mix-banner-weight">× ${(ratio/100).toFixed(2)}</span>
+            </div>
+            <div class="mix-banner-row">
+              <span class="mix-banner-region">${REGION_LABELS[region2]}</span>
+              <span class="mix-banner-bar"><span class="mix-banner-fill" style="width: ${Math.min(s2 / Math.max(s1, s2, 0.001) * 100, 100)}%;"></span></span>
+              <span class="mix-banner-pct">${formatScore(s2)}</span>
+              <span class="mix-banner-weight">× ${((100-ratio)/100).toFixed(2)}</span>
+            </div>
+          </div>
+          <p class="mix-banner-note">The two scores are weighted by your heritage ratio. Note: your actual Y-line comes from <em>one</em> of these two heritages, whichever your unbroken paternal line traces to. The weighted score reflects your expected odds before knowing which side.</p>
+        </div>`;
+    }
+  }
+
+  // Stash for share buttons
+  window.__lastResult = {
+    figureName: f.name,
+    figureCat: f.cat,
+    isMt: isMt,
+    probLabel: probLabel,
+    scoreText: formatScore(top.score),
+    note: f.note
+  };
+
+  const result = document.getElementById('result');
+  result.innerHTML = `
+    <div class="result-banner">
+      <div class="result-rank">Your strongest match · ${probLabel}</div>
+      <div class="result-name">${f.name}</div>
+      <div class="result-prob">approximately ${formatScore(top.score)} probability${isMt ? ' (mtDNA)' : ' (Y-line)'}</div>
+      ${mixBanner}
+      <div class="result-note">${f.note}${context}</div>
+    </div>
+    <div class="result-secondary">
+      ${runners.map((r, i) => `
+        <div class="result-runner">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">No. ${i+2}</div>
+          <div class="runner-name">${r.figure.name}</div>
+          <div class="runner-prob">${formatScore(r.score)}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="share-row">
+      <button class="share-btn" onclick="downloadCard()">↓ Download share card</button>
+      <button class="share-btn share-btn-alt" onclick="copySummary(this)">⧉ Copy summary</button>
+    </div>
+    <p style="margin-top: 32px; font-size: 15px; color: var(--ink-soft); font-style: italic; text-align: center; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7;">A Fermi-style estimate, not a test. Real Y-DNA testing through FTDNA Big-Y is the only way to actually know your haplogroup. Most male lines from antiquity are extinct; the survey describes which surviving line, if any, you are statistically nearest.</p>
+  `;
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function copySummary(btn) {
+  const r = window.__lastResult;
+  if (!r) return;
+  const lineType = r.isMt ? 'mtDNA line' : 'Y-line';
+  const summary = `My clan: ${r.figureName}\n${r.probLabel} match · approximately ${r.scoreText} probability (${lineType})\n\nFrom "What Is Your Clan" · a Y-DNA & mtDNA lineage survey.`;
+  navigator.clipboard.writeText(summary).then(() => {
+    const old = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = old; }, 1800);
+  }).catch(() => {
+    btn.textContent = '✗ Copy failed';
+    setTimeout(() => { btn.textContent = '⧉ Copy summary'; }, 1800);
+  });
+}
+
+function downloadCard() {
+  const r = window.__lastResult;
+  if (!r) return;
+  const W = 1200, H = 1500;
+  const lineType = r.isMt ? 'mtDNA LINE' : 'Y-LINE';
+
+  // Wrap the note text manually (rough, but works for SVG without canvas measurement)
+  const wrapText = (text, maxChars) => {
+    const words = text.split(' ');
+    const lines = [];
+    let cur = '';
+    words.forEach(w => {
+      if ((cur + ' ' + w).trim().length > maxChars) {
+        lines.push(cur.trim());
+        cur = w;
+      } else {
+        cur = (cur + ' ' + w).trim();
+      }
+    });
+    if (cur) lines.push(cur);
+    return lines;
+  };
+
+  const noteLines = wrapText(r.note, 58).slice(0, 8);
+  // Escape XML special chars
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <pattern id="grain" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" fill="#f4ece0"/>
+    </pattern>
+  </defs>
+  <rect width="${W}" height="${H}" fill="#f4ece0"/>
+  <rect width="${W}" height="${H}" fill="url(#grain)"/>
+  <rect x="60" y="60" width="${W-120}" height="${H-120}" fill="none" stroke="#c9b896" stroke-width="1.5"/>
+  <rect x="76" y="76" width="${W-152}" height="${H-152}" fill="none" stroke="#c9b896" stroke-width="0.5"/>
+
+  <!-- Header strip -->
+  <text x="${W/2}" y="180" font-family="Georgia, serif" font-size="22" letter-spacing="6" fill="#6b5d4f" text-anchor="middle" font-weight="500">WHAT IS YOUR CLAN</text>
+  <line x1="${W/2 - 60}" y1="210" x2="${W/2 + 60}" y2="210" stroke="#8b1e1e" stroke-width="2"/>
+
+  <!-- Big italic "My clan" -->
+  <text x="${W/2}" y="340" font-family="Georgia, serif" font-style="italic" font-size="62" fill="#3d342b" text-anchor="middle">my clan is</text>
+
+  <!-- Figure name (auto-sized) -->
+  <text x="${W/2}" y="${r.figureName.length > 22 ? 460 : 480}" font-family="Georgia, serif" font-size="${r.figureName.length > 22 ? 76 : 96}" fill="#1a1612" text-anchor="middle" font-weight="500">${esc(r.figureName)}</text>
+
+  <!-- Decorative ornament -->
+  <g transform="translate(${W/2}, 560)">
+    <line x1="-180" y1="0" x2="-30" y2="0" stroke="#c9b896" stroke-width="1"/>
+    <line x1="30" y1="0" x2="180" y2="0" stroke="#c9b896" stroke-width="1"/>
+    <circle cx="0" cy="0" r="6" fill="none" stroke="#8b1e1e" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="2" fill="#8b1e1e"/>
+  </g>
+
+  <!-- Probability label -->
+  <text x="${W/2}" y="650" font-family="Georgia, serif" font-size="32" font-style="italic" fill="#8b1e1e" text-anchor="middle">${esc(r.probLabel)} match</text>
+  <text x="${W/2}" y="710" font-family="Georgia, serif" font-size="44" fill="#1a1612" text-anchor="middle" font-weight="500">${esc(r.scoreText)} probability</text>
+  <text x="${W/2}" y="755" font-family="monospace" font-size="20" letter-spacing="4" fill="#6b5d4f" text-anchor="middle">${lineType}</text>
+
+  <!-- Note text -->
+  <g transform="translate(${W/2}, 880)">
+    ${noteLines.map((ln, i) =>
+      `<text x="0" y="${i * 38}" font-family="Georgia, serif" font-size="24" fill="#3d342b" text-anchor="middle" font-style="italic">${esc(ln)}</text>`
+    ).join('\n    ')}
+  </g>
+
+  <!-- Footer -->
+  <line x1="${W/2 - 120}" y1="${H - 200}" x2="${W/2 + 120}" y2="${H - 200}" stroke="#c9b896" stroke-width="0.5"/>
+  <text x="${W/2}" y="${H - 150}" font-family="Georgia, serif" font-size="22" font-style="italic" fill="#6b5d4f" text-anchor="middle">A Y-DNA and mtDNA lineage survey</text>
+  <text x="${W/2}" y="${H - 110}" font-family="monospace" font-size="14" letter-spacing="3" fill="#8b7d6f" text-anchor="middle">ONE MAN · ONE SON · EIGHTY GENERATIONS</text>
+</svg>`;
+
+  // Convert SVG to PNG via canvas
+  const img = new Image();
+  const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#f4ece0';
+    ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(img, 0, 0, W, H);
+    canvas.toBlob(pngBlob => {
+      const dlUrl = URL.createObjectURL(pngBlob);
+      const a = document.createElement('a');
+      a.href = dlUrl;
+      a.download = `my-clan-${r.figureName.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(dlUrl);
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  img.onerror = () => {
+    // Fallback: download the SVG itself
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `my-clan-${r.figureName.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.svg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+  img.src = url;
+}
+</script>
+
+</body>
+</html>
